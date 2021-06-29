@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Site description and Keywords-->
+    <meta name="description"
+        content="Mighty Quest is an interactive website to help growth of children in year 2 and move towards year 3 by learning with play.">
+    <meta name="keywords" content="learning for kids, year 2 learning material, KS1 study material, learn and play children">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Mighty Quest</title>
+</head>
+<body>
+    <!--Header and menu links-->
+    <header>
+        <div id="logo">
+            <h1>Mighty Quest</h1>
+        </div>
+        <div id="menu">
+            <a href="index.html">Home</a>
+            <a href="lessons.html">Lessons</a>
+            <a href="quiz.html" class="active">Quiz</a>
+            <a href="memory-game.html">Memory Game</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </header>
+    <!--Intro Quiz section with collapsible tabs-->
+    <section>
+        <h2>Quiz</h2>
+        <hr>
+        <p id="center">Please click on the relevant subject to play the quiz and enjoy.</p>
+        <div class="quiz-tab">
+            <button class="quiz-links" onclick="openQuiz(event, 'science')">Science</button>
+            <button class="quiz-links" onclick="openQuiz(event, 'geography')">Geography</button>
+            <button class="quiz-links" onclick="openQuiz(event, 'maths')">Maths</button>
+        </div>
+    </section>
+    <div id="questions"></div>
+     <hr>
+    <!-- Quick links to all tabs again with buttons-->
+    <section>
+        <h2>Click on appropriate button if you wish to proceed.</h2>
+        <div id="bottom-container">
+            <button class="bottom-link">
+                <span><a href="index.html">Home</a></span>
+            </button>
+            <button class="bottom-link">
+                <span><a href="lessons.html">Lessons</a></span>
+            </button>
+            <button class="bottom-link">
+                <span><a href="memory-game.html">Memory Game</a></span>
+            </button>
+            <button class="bottom-link">
+                <span><a href="contact.html">Contact</a></span>
+            </button>
+        </div>
+        <hr>
+    </section> -->
+    <!-- Footer
+    <footer>
+        <ul class="social-media">
+            <li>    
+                <a href="https://twitter.com" target="_blank" rel="noopener" 
+                aria-label="Visit our Twitter page (Opens in a new tab)"><i class="fab fa-twitter-square"></i></a>
+            </li>
+            <li>
+                <a href="https://facebook.com" target="_blank" rel="noopener" 
+                aria-label="Visit our Facebook page (Opens in a new tab)"><i class="fab fa-facebook-square"></i></a>
+            </li>
+            <li>
+                <a href="https://instagram.com" target="_blank" rel="noopener" 
+                aria-label="Visit our Instagram page (Opens in a new tab)"><i class="fab fa-instagram-square"></i></a>
+            </li>
+            <li>
+                <p>Copyright for project</p>
+            </li>
+        </ul>
+    </footer> -->
+    <!--General and Science Quiz Javascript page link-->
+    <script src="assets/js/quiz.js"></script>
+    <!--Fontawesome script-->
+    <script src="https://kit.fontawesome.com/22f8691744.js" crossorigin="anonymous"></script>
+    </body>
+    </html>
