@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 // Function wide declarations
-let start_btn, info_box, exit_btn, continue_btn, quiz_box, result_box, option_list, time_line, timeText, timeCount;
+let start_btn, info_box, exit_btn, activeInfo, continue_btn, quiz_box, result_box, option_list, time_line, timeText, timeCount;
 let timeValue =  25,
  question_count = 0,
  question_numb = 1,
@@ -16,12 +16,13 @@ function openQuiz(event, subject) {
     questionsDiv.innerHTML = "";
     populateQuestions(questionsDiv, subject);
 }
+// Function to populate questions by
 function populateQuestions(questionsDiv, subject) {
-    questionsDiv.innerHTML += `<div class="start_btn">
-            <button onclick="startQuiz()">Start ${subject} Quiz</button>
+    questionsDiv.innerHTML += 
+        `<div class="start_btn">
         </div>
-        <div class="info_box">
-            <div class="info-title"><span>Rules of the Quiz</span></div>
+        <div class="info_box activeInfo">
+            <div class="info-title"><span>Rules of the ${subject} Quiz</span></div>
             <div class="info-list">
                 <div class="info">You will have only <span>25 seconds</span> per each question.</div>
                 <div class="info">Once you select your answer, it cannot be changed.</div>
@@ -36,7 +37,7 @@ function populateQuestions(questionsDiv, subject) {
         <!-- Quiz Box -->
         <div class="quiz_box">
             <header>
-                <div class="title">Science Quiz</div>
+                <div class="title">${subject} Quiz</div>
                 <div class="timer">
                     <div class="time_left_txt">Time Left</div>
                     <div class="timer_sec">25</div>
@@ -75,81 +76,13 @@ function populateQuestions(questionsDiv, subject) {
         </div>
     </div>`;
 }
-/** Science quiz section */
-/** Science section questions */
-// creating an array and passing the number, questions, options, and answers
-let questions = [
-    {
-    numb: 1,
-    question: "Eating what is important for your health?",
-    answer: "A Balanced Diet",
-    options: [
-        "Sugars",
-        "Carbohydrates",
-        "A Balanced Diet",
-        "Junk Food"
-        ]
-    },
-    {
-    numb: 2,
-    question: "How many food groups are there in a balanced diet?",
-    answer: "Five",
-    options: [
-        "Five",
-        "Six",
-        "Seven",
-        "Ten"
-        ]
-    },
-    {
-    numb: 3,
-    question: "What are building blocks for the body because they help it grow and repair itself?",
-    answer: "Protein",
-    options: [
-        "Carbohydrates",
-        "Protein",
-        "Fruits and Vegetables",
-        "Dairy Products"
-        ]
-    },
-    {
-    numb: 4,
-    question: "Which products are important because they keep your bones and teeth healthy?",
-    answer: "Dairy Products",
-    options: [
-        "Protein",
-        "Carbohydrates",
-        "Dairy Products",
-        "Fruits and Vegetables"
-        ]
-    },
-    {
-    numb: 5,
-    question: "What are full of health-boosting vitamins, antioxidants and fibre?",
-    answer: "Fruits and Vegetables",
-    options: [
-        "Dairy Products",
-        "Carbohydrates",
-        "Fruits and Vegetables",
-        "Protein"
-        ]
-    },
-    {
-        numb: 6,
-        question: "Too much of which food group can damage your teeth or make you gain weight?",
-        answer: "Fats and Sugars",
-        options: [
-            "Dairy Products",
-            "Carbohydrates",
-            "Fruits and Vegetables",
-            "Fats and Sugars"
-            ]
-        }
-];
+
 function startQuiz() {
+    alert('hello'); //testing
     //Declare variables for Science Quiz
-    start_btn = document.querySelector(".start_btn button");
+    start_btn = document.getElementsByClassName("start_btn button");
     info_box = document.querySelector(".info_box");
+    active_info = info_box.querySelector(".activeInfo")
     exit_btn = info_box.querySelector(".buttons .quit");
     continue_btn = info_box.querySelector(".buttons .restart");
     quiz_box = document.querySelector(".quiz_box");
@@ -177,8 +110,52 @@ function startQuiz() {
     };
 }
 
-let restart_quiz = result_box.querySelector(".buttons .restart");
-let quit_quiz = result_box.querySelector(".buttons .quit");
+// getting questions and options from array
+function showQuestions(index, subject) {
+    let question_text = document.querySelector(".question_text");
+
+    //creating a new span and div tag for question and option and passing the value using array index
+    let question_tag = '<span>'+ questions[index].numb + ". " + questions[index].question +'</span>';
+    let option_tag = 
+        '<div class="option"><span>'+ questions[index].options[0] +'</span></div>' + 
+        '<div class="option"><span>'+ questions[index].options[1] +'</span></div>' + 
+        '<div class="option"><span>'+ questions[index].options[2] +'</span></div>' + 
+        '<div class="option"><span>'+ questions[index].options[3] +'</span></div>';
+    question_text.innerHTML = question_tag; //adding new span tag inside question_tag
+    option_list.innerHTML = option_tag; //adding new div tag inside option_tag
+    
+    let option = option_list.querySelectorAll(".option");
+    // set onclick attribute to all available options
+    for(i=0; i < option.length; i++){
+        option[i].setAttribute("onclick", "optionSelected(this)");
+    }
+}
+
+// if startQuiz button is clicked
+document.getElementsByClassName(start_btn).onclick = function(){ 
+    info_box.classList.add("activeInfo"); //show info box
+    alert ('clicked start button for quiz.');
+};
+
+// if exitQuiz button clicked
+document.getElementsByClassName(exit_btn).onclick = function(){ 
+    info_box.classList.remove("activeInfo"); 
+    alert ('clicked exit button for quiz.');    
+};
+
+// if continueQuiz button clicked
+document.getElementsByClassName(continue_btn).onclick = function(){ 
+    info_box.classList.remove("activeInfo");
+    quiz_box.classList.add("activeQuiz");
+    //calling showQuestions function
+    showQuestions(0); 
+    questionCounter(1); 
+    startTimer(25); 
+    startTimerLine(0); 
+};
+
+let restart_quiz = document.getElementsByClassName("restart");
+let quit_quiz = document.getElementsByClassName("quit");
 
 // if restartQuiz button clicked
 restart_quiz.onclick = ()=>{
@@ -207,7 +184,7 @@ quit_quiz.onclick = ()=>{
     window.location.reload(); 
 };
 
-let next_btn = document.querySelector(".footer .next_btn");
+let next_btn = document.getElementsByClassName(".footer .next_btn");
 let bottom_ques_counter = document.querySelector(".footer .total_question");
 
 // if Next Question button clicked
@@ -229,27 +206,6 @@ next_btn.onclick = ()=>{
         showResult(); //calling showResult function
     }
 };
-
-// getting questions and options from array
-function showQuestions(index) {
-    let question_text = document.querySelector(".question_text");
-
-    //creating a new span and div tag for question and option and passing the value using array index
-    let question_tag = '<span>'+ questions[index].numb + ". " + questions[index].question +'</span>';
-    let option_tag = 
-        '<div class="option"><span>'+ questions[index].options[0] +'</span></div>' + 
-        '<div class="option"><span>'+ questions[index].options[1] +'</span></div>' + 
-        '<div class="option"><span>'+ questions[index].options[2] +'</span></div>' + 
-        '<div class="option"><span>'+ questions[index].options[3] +'</span></div>';
-    question_text.innerHTML = question_tag; //adding new span tag inside question_tag
-    option_list.innerHTML = option_tag; //adding new div tag inside option_tag
-    
-    let option = option_list.querySelectorAll(".option");
-    // set onclick attribute to all available options
-    for(i=0; i < option.length; i++){
-        option[i].setAttribute("onclick", "optionSelected(this)");
-    }
-}
 
 // creating the new div tags for icons
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
