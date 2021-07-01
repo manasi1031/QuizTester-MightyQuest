@@ -15,7 +15,7 @@ function openQuiz(event, subject) {
     let questionsDiv = document.getElementById("questions");
     questionsDiv.innerHTML = "";
     populateQuestions(questionsDiv, subject);
-    console.log('populate questions by type')
+    console.log('populate questions by type');
 }
 // Function to populate questions by
 function populateQuestions(questionsDiv, subject) {
@@ -81,17 +81,17 @@ function populateQuestions(questionsDiv, subject) {
 function startQuiz() {
     console.log('hello'); //testing
     //Declare variables for Science Quiz
-    start_btn = getElementsByClassName("restart");
-    info_box = document.querySelector(".info_box");
-    active_info = info_box.querySelector(".activeInfo");
-    exit_btn = document.getElementsByClassName("quit");
-    continue_btn = document.getElementsByClassName("next_btn");
-    quiz_box = document.getElementsByClassName("quiz_box");
-    result_box = document.querySelector(".result_box");
-    option_list = document.querySelector(".option_list");
-    time_line = document.querySelector("header .time_line");
-    timeText = document.querySelector(".timer .time_left_txt");
-    timeCount = document.querySelector(".timer .timer_sec");
+    let start_btn = document.querySelector(".start_btn button");
+    let info_box = document.querySelector(".info_box");
+    let exit_btn = info_box.querySelector(".buttons .quit");
+    let continue_btn = info_box.querySelector(".buttons .restart");
+    let quiz_box = document.querySelector(".quiz_box");
+    let result_box = document.querySelector(".result_box");
+    let option_list = document.querySelector(".option_list");
+    let time_line = document.querySelector("header .time_line");
+    let timeText = document.querySelector(".timer .time_left_txt");
+    let timeCount = document.querySelector(".timer .timer_sec");
+    
     
     // show info box
     info_box.classList.add("activeInfo");
@@ -119,12 +119,12 @@ function showQuestions(index, type) {
     let question_text = document.querySelector(".question_text");
     
     //creating a new span and div tag for question and option and passing the value using array index
-    let question_tag = '<span>'+ quizQuestions(type).questions[index].numb + ". " + quizQuestions(type).questions[index].question +'</span>';
+    let question_tag = '<span>'+ quizQuestions(type[0]).questions[index].numb + ". " + quizQuestions(type[0]).questions[index].question +'</span>';
     let option_tag = 
-        '<div class="option"><span>'+ quizQuestions(type).questions[index].options[0] +'</span></div>' + 
-        '<div class="option"><span>'+ quizQuestions(type).questions[index].options[1] +'</span></div>' + 
-        '<div class="option"><span>'+ quizQuestions(type).questions[index].options[2] +'</span></div>' + 
-        '<div class="option"><span>'+ quizQuestions(type).questions[index].options[3] +'</span></div>';
+        '<div class="option"><span>'+ quizQuestions(type[0]).questions[index].options[0] +'</span></div>' + 
+        '<div class="option"><span>'+ quizQuestions(type[0]).questions[index].options[1] +'</span></div>' + 
+        '<div class="option"><span>'+ quizQuestions(type[0]).questions[index].options[2] +'</span></div>' + 
+        '<div class="option"><span>'+ quizQuestions(type[0]).questions[index].options[3] +'</span></div>';
     question_text.innerHTML = question_tag; //adding new span tag inside question_tag
     option_list.innerHTML = option_tag; //adding new div tag inside option_tag
     
@@ -147,7 +147,7 @@ document.getElementsByClassName(start_btn).onclick = function(){
 document.getElementsByClassName(exit_btn).onclick = function() {
     document.getElementsByClassName.remove("activeInfo exit_btn"); //remove pop up
     console.log('clicked exit button for quiz.');
-    }, false;
+};
 
 
 // if continueQuiz button clicked
